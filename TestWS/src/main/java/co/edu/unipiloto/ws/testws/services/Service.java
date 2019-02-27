@@ -26,19 +26,25 @@ public class Service {
     
     //Simulara una ´base de datos´
     private static Map<Integer, Person> persons = new HashMap<Integer, Person>();
+    private static int sal;
+    private static int prom;
     
     //Insertara los datos de la base de datos   
     static{
         int minimumSalary = 800000;
+        int id = 0;
         for(int i=0; i<10; i++){
             Person person = new Person();
-            int id = i + 1;
+            id = i + 1;
             person.setId(id);
             person.setFullName("My hermosa persona " + id);
             person.setAge(new Random().nextInt(40+1));
-            //person.setSalary(person.getAge()*minimumSalary/3);
+            person.setSalary(person.getAge()*minimumSalary/3);
+            sal += person.getSalary();
             persons.put(id, person);
         }
+        
+        prom = sal / id;
     }
     
     //Metodo la cual va a escoger una persona unica objeto en formato XML
@@ -69,15 +75,14 @@ public class Service {
     @GET
     @Path("/getAllSalarysInXML")
     @Produces(MediaType.APPLICATION_XML)
-    public Person getAllSalarysInXML(@PathParam("salary")int salary){
-        return persons.get(salary);
+    public int getAllSalarysInXML(@PathParam("salary")int salary){
+        return sal;
     }
     
         @GET
     @Path("/getAllSalarysInJSON")
     @Produces(MediaType.APPLICATION_JSON)
-    public Person getAllSalarysInJSON(@PathParam("salary")int salary){
-        return persons.get(salary)
-                ;
+    public int getAllSalarysInJSON(@PathParam("salary")int salary){
+        return prom;
     }
 }
