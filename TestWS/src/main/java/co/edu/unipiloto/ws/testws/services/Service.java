@@ -39,7 +39,7 @@ public class Service {
             person.setId(id);
             person.setFullName("My hermosa persona " + id);
             person.setAge(new Random().nextInt(40+1));
-            person.setSalary(person.getAge()*minimumSalary/3);
+            person.setSalary((person.getAge()*minimumSalary)/3);
             sal += person.getSalary();
             persons.put(id, person);
         }
@@ -71,7 +71,7 @@ public class Service {
         return new ArrayList<Person>(persons.values());
     }
     
-        //Metodo la cual va a retornar la lista de todas las personas en formato XML
+    //Metodo la cual va a retornar la lista de todas las personas en formato XML
     @GET
     @Path("/getAllSalarysInXML")
     @Produces(MediaType.APPLICATION_XML)
@@ -79,7 +79,7 @@ public class Service {
         return sal;
     }
     
-        @GET
+    @GET
     @Path("/getAllSalarysInJSON")
     @Produces(MediaType.APPLICATION_JSON)
     public int getAllSalarysInJSON(@PathParam("salary")int salary){
